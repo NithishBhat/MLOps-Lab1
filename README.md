@@ -1,7 +1,7 @@
 # LAB1 — MLOps (IE-7374)
 
-Lab 1 submission: virtual environment, repository/folder structure, `calculator.py`,
-pytest + unittest test suites, and two GitHub Actions workflows.
+Lab 1 submission: virtual environment, repository/folder structure, a geometry
+module, pytest + unittest test suites, and two GitHub Actions workflows.
 
 ## Structure
 
@@ -12,7 +12,7 @@ mlops-lab1/
 │   └── unittest_action.yml    # CI: runs python -m unittest test.test_unittest
 ├── data/                      # project data files
 ├── src/
-│   └── calculator.py          # fun1..fun4
+│   └── shapes.py              # area calculations
 ├── test/
 │   ├── test_pytest.py         # pytest tests (incl. a parametrized example)
 │   └── test_unittest.py       # unittest.TestCase tests
@@ -21,16 +21,17 @@ mlops-lab1/
 └── README.md
 ```
 
-## Functions in `src/calculator.py`
+## Functions in `src/shapes.py`
 
 | Function | Behaviour |
 |---|---|
-| `fun1(x, y)` | adds `x` and `y` |
-| `fun2(x, y)` | subtracts `y` from `x` |
-| `fun3(x, y)` | multiplies `x` and `y` |
-| `fun4(x, y, z)` | returns the sum of the three results |
+| `rectangle_area(length, width)` | area of a rectangle, `length * width` |
+| `triangle_area(base, height)` | area of a triangle, `0.5 * base * height` |
+| `circle_area(radius)` | area of a circle, `pi * radius ** 2` |
+| `total_area(a1, a2, a3)` | sum of the three areas above |
 
-`fun1`–`fun3` raise `ValueError` if either input is not a number.
+The three area functions raise `ValueError` if an input is not a number or is
+negative.
 
 ## Setup
 

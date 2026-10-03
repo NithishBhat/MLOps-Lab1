@@ -1,3 +1,4 @@
+import math
 import os
 import sys
 import unittest
@@ -6,38 +7,46 @@ import unittest
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(project_root)
 
-from src import calculator
+from src import shapes
 
 
-class TestCalculator(unittest.TestCase):
+class TestShapes(unittest.TestCase):
 
-    def test_fun1(self):
-        self.assertEqual(calculator.fun1(2, 3), 5)
-        self.assertEqual(calculator.fun1(5, 0), 5)
-        self.assertEqual(calculator.fun1(-1, 1), 0)
-        self.assertEqual(calculator.fun1(-1, -1), -2)
+    def test_rectangle_area(self):
+        self.assertEqual(shapes.rectangle_area(2, 3), 6)
+        self.assertEqual(shapes.rectangle_area(5, 0), 0)
+        self.assertEqual(shapes.rectangle_area(1, 1), 1)
+        self.assertEqual(shapes.rectangle_area(2.5, 4), 10)
 
-    def test_fun2(self):
-        self.assertEqual(calculator.fun2(2, 3), -1)
-        self.assertEqual(calculator.fun2(5, 0), 5)
-        self.assertEqual(calculator.fun2(-1, 1), -2)
-        self.assertEqual(calculator.fun2(-1, -1), 0)
+    def test_triangle_area(self):
+        self.assertEqual(shapes.triangle_area(2, 3), 3)
+        self.assertEqual(shapes.triangle_area(5, 0), 0)
+        self.assertEqual(shapes.triangle_area(1, 1), 0.5)
+        self.assertEqual(shapes.triangle_area(3, 4), 6)
 
-    def test_fun3(self):
-        self.assertEqual(calculator.fun3(2, 3), 6)
-        self.assertEqual(calculator.fun3(5, 0), 0)
-        self.assertEqual(calculator.fun3(-1, 1), -1)
-        self.assertEqual(calculator.fun3(-1, -1), 1)
+    def test_circle_area(self):
+        self.assertEqual(shapes.circle_area(0), 0)
+        self.assertAlmostEqual(shapes.circle_area(1), math.pi)
+        self.assertAlmostEqual(shapes.circle_area(2), 4 * math.pi)
+        self.assertAlmostEqual(shapes.circle_area(0.5), 0.25 * math.pi)
 
-    def test_fun4(self):
-        self.assertEqual(calculator.fun4(2, 3, 5), 10)
-        self.assertEqual(calculator.fun4(5, 0, -1), 4)
-        self.assertEqual(calculator.fun4(-1, -1, -1), -3)
-        self.assertEqual(calculator.fun4(-1, -1, 100), 98)
+    def test_total_area(self):
+        self.assertEqual(shapes.total_area(2, 3, 5), 10)
+        self.assertEqual(shapes.total_area(6, 3, 0), 9)
+        self.assertEqual(shapes.total_area(0, 0, 0), 0)
+        self.assertEqual(shapes.total_area(1.5, 2.5, 96), 100)
 
     def test_raises_on_non_numbers(self):
         with self.assertRaises(ValueError):
-            calculator.fun1("2", 3)
+            shapes.rectangle_area("2", 3)
+        with self.assertRaises(ValueError):
+            shapes.circle_area("2")
+
+    def test_raises_on_negative_dimensions(self):
+        with self.assertRaises(ValueError):
+            shapes.triangle_area(-1, 3)
+        with self.assertRaises(ValueError):
+            shapes.circle_area(-1)
 
 
 if __name__ == '__main__':
