@@ -1,0 +1,24 @@
+# Virtual environment (Step 1 of the lab)
+lab_01/
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Testing
+.pytest_cache/
+pytest-report.xml
+.coverage
+htmlcov/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
